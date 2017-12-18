@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/17 20:04:03 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/17 21:23:48 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_tetri	*parsefile(char *file)
 	int		br;
 	t_tetri	*list;
 	t_tetri 	*p;
-	
+
 	fd = open(file, O_RDONLY);
 	if (open_error(fd) == 0)
 		return (NULL);

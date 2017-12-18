@@ -6,11 +6,12 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 19:49:04 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/17 19:57:56 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/17 21:30:12 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+int globalcheck = 0;
 
 int	open_error(int fd)
 {
@@ -132,6 +133,15 @@ void	ft_max(t_tetri *fuck, int y, int x, int pound)
 	}
 }
 
+int		ft_setletter(t_tetri *fuck)
+{
+	if (globalcheck == 26)
+		return (0);
+	fuck->letter = 'A' + globalcheck;
+	globalcheck++;
+	return (1);
+}
+
 int	check_valid(t_tetri *fuck, char **store)
 {
 	int i;
@@ -159,6 +169,8 @@ int	check_valid(t_tetri *fuck, char **store)
 		i = 0;
 		n++;
 	}
+	if (ft_setletter(fuck) == 0)
+		return (0);
 	if (connections == 6 || connections == 8)
 		return (1);
 	return (0);
