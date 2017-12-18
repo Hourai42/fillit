@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 19:49:04 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/16 14:15:18 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/17 19:57:56 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,96 @@ int	ft_check_characters(char *str)
 	if (count != 4)
 		return (0);
 	return (1);
+}
+
+int	ft_check_connections(char **str, int y, int x)
+{
+	int connections;
+
+	connections = 0;
+	if (x > 0)
+	{
+		if (str[y][x - 1] == '#')
+			connections++;
+	}
+	if (x < 3)
+	{
+		if (str[y][x + 1] == '#')
+			connections++;
+	}
+	if (y > 0)
+	{
+		if (str[y - 1][x] == '#')
+			connections++;
+	}
+	if (y < 3)
+	{
+		if (str[y + 1][x] == '#')
+			connections++;
+	}
+	return (connections);
+}
+
+void	ft_min(t_tetri *fuck, int y, int x, int pound)
+{
+	if (pound == 1)
+	{
+		fuck->miny = y;
+		fuck->minx = x;
+	}
+	else
+	{
+		if (y < fuck->miny)
+			fuck->miny = y;
+		if (x < fuck->minx)
+			fuck->minx = x;
+	}
+}
+
+void	ft_max(t_tetri *fuck, int y, int x, int pound)
+{
+	if (pound == 1)
+	{
+		fuck->maxy = y;
+		fuck->maxx = x;
+	}
+	else
+	{
+		if (y > fuck->maxy)
+			fuck->maxy = y;
+		if (x > fuck->maxx)
+			fuck->maxx = x;
+	}
+}
+
+int	check_valid(t_tetri *fuck, char **store)
+{
+	int i;
+	int n;
+	int pounds;
+	int connections;
+
+	connections = 0;
+	pounds = 0;
+	i = 0;
+	n = 0;
+	while (store[n] != 0)
+	{
+		while (store[n][i] != '\0')
+		{
+			if (store[n][i] == '#')
+			{
+				pounds++;
+				connections += ft_check_connections(store, n, i);
+				ft_min(fuck, n, i, pounds);
+				ft_max(fuck, n, i, pounds);
+			}
+			i++;
+		}
+		i = 0;
+		n++;
+	}
+	if (connections == 6 || connections == 8)
+		return (1);
+	return (0);
 }

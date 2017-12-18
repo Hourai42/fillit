@@ -6,30 +6,32 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/16 14:18:41 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/17 20:04:03 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /* Creates new nodes to put tetriminos in-- expands the linked list to hold everything. */
-void	ft_listcreate(t_tetri **p, char *str, int br)
+int		ft_listcreate(t_tetri **p, char *str, int br)
 {
 	t_tetri	 *new;
 
 	new = malloc(sizeof(t_tetri));
 	new->next = 0;
-	new->tetrimino = ft_convertdata(str, br);
+	new->tetrimino = ft_convertdata(str, br, new);
+	if (!(new->tetrimino))
+		return (0);
 	(*p)->next = new;
 	(*p) = new;
+	return (1);
 }
 /*Converts the buffer, which is in str format, into a two-dimensional array */
-char	**ft_convertdata(char *str, int br)
+char	**ft_convertdata(char *str, int br, t_tetri *fuck)
 {
 	int 	i;
 	char	**store;
 	int 	n;
-
 	
 	if (ft_check_buffer(str, br) == 0)
 		return (NULL);
@@ -48,8 +50,11 @@ char	**ft_convertdata(char *str, int br)
 		store[n++][i] = '\0';
 		str++;
 	}
+	if (check_valid(fuck, store) == 0)
+		return (NULL);
 	return (store);
 }
+
 /* Goes through the file, putting the buffer into a linked list */
 t_tetri	*parsefile(char *file)
 {
@@ -70,11 +75,12 @@ t_tetri	*parsefile(char *file)
 	{
 		if (list->tetrimino == NULL)
 		{
-			if (!(list->tetrimino = ft_convertdata(str, br)))
+			if (!(list->tetrimino = ft_convertdata(str, br, list)))
 					return (NULL);
 		}
 		else
-			ft_listcreate(&p, str, br);
+			if (ft_listcreate(&p, str, br) == 0)
+				return (NULL);
 	}
 	if (close_error(close(fd)) == 0)
 		return (NULL); 
@@ -117,6 +123,3 @@ void	ft_free(t_tetri *tetri)
 		free(p);	
 	}
 } 
-
-
-
