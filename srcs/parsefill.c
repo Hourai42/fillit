@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/17 21:23:48 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/17 21:47:00 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_tetri	*parsefile(char *file)
 	}
 	if (close_error(close(fd)) == 0)
 		return (NULL); 
-	if (br != 0)
+	if (br != 0 || globalcheck == 0)
 		return (NULL);
 	return (list);
 }
