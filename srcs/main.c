@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 18:42:49 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/16 14:03:57 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/20 13:12:57 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (!(tetri = parsefile(argv[1])))
+		{
 			ft_putstr("Invalid file\n");
-		print_pieces(tetri);
+			return (0);
+		}
+		createboard(tetri);	
 		ft_free(tetri);
 	}
 	else
