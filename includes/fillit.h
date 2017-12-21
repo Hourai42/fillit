@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:04:25 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/20 21:35:51 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 15:04:34 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ extern int tally;
 int	solvefillit(t_tetri *tetri, char **board, int dimensions);
 void	deletepiece(int ps[4][2], char **board);
 void	placepiece(int ps[4][2], char **board, t_tetri *tetri);
-int		canplace(int c[4][2], char **board, int y, int x, int ps[4][2]);
+int		canplace(int c[4][2], char **board, int y, int x, int ps[4][2], int dimensions);
 void	finishboard(int c[4][2], int y, int x, int ps[4][2]);
 void	zeroboard(int c[4][2]);
 void	tetricoordinates(int c[4][2], t_tetri *tetri);
