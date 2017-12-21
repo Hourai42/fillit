@@ -6,13 +6,12 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 18:00:03 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 15:06:15 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 15:24:43 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int dimensions = 0;
 int tally = 0;
 
 int	solvefillit(t_tetri *tetri, char **board, int dimensions)
@@ -194,6 +193,7 @@ void	createboard(t_tetri *tetri)
 	char **board;	
 	int i;
 	int n;
+	int dimensions;
 
 	//ft_putstr("Makes the board\n");
 	n = 0;
@@ -213,8 +213,8 @@ void	createboard(t_tetri *tetri)
 		i = 0;
 		n++;
 	}
-	dimensions = smallest_square(globalcheck + 1);
-   	if ((solvefillit(tetri, board, dimensions) == 1) || (solvefillit(tetri, board, dimensions) == 0))	
+	dimensions = smallest_square(globalcheck);
+   	if ((solvefillit(tetri, board, dimensions) == 1))
 		printboard(board, dimensions);
 }
 
