@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:04:25 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/20 18:38:51 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/20 21:35:51 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	smallest_square(int i);
 void	createboard(t_tetri *tetri);
 void printboard(char **board, int dimensions);
 extern int dimensions;
+extern int tally;
 int	solvefillit(t_tetri *tetri, char **board, int dimensions);
 void	deletepiece(int ps[4][2], char **board);
 void	placepiece(int ps[4][2], char **board, t_tetri *tetri);

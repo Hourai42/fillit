@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 18:00:03 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/20 19:17:46 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/20 23:17:38 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 #include <stdio.h> //Delete this along with all da putstrs later! 
 
 int dimensions = 0;
+int tally = 0;
 
 int	solvefillit(t_tetri *tetri, char **board, int dimensions)
 {
-	COUNTER_VARIABLES;
-	int	 c[4][2];
-	int  ps[4][2];
-
-	ft_putstr("solve fill it\n");
+	int y;
+	int x;
+	int	 c[4][2] = {{0, 0},
+					{0, 0},
+					{0, 0},
+					{0, 0}};
+	int  ps[4][2] = {{0, 0},
+					{0, 0},
+					{0, 0},
+					{0, 0}};
+	y = 0;
+	x = 0;
 	if (tetri == NULL)
 		return (1); 
 	tetricoordinates(c, tetri);
@@ -39,21 +47,21 @@ int	solvefillit(t_tetri *tetri, char **board, int dimensions)
 				}				
 			x++;
 		}
+		x = 0;
 		y++;
 	}
-	//if (tetri->letter == 'A')
-	//{
-	//	dimensions++;
-	//	solvefillit(tetri, board, dimensions);	
-	//}
-	//else
+	if (tetri->letter == 'A')
+	{
+		tally++;
+		solvefillit(tetri, board, dimensions + 1);	
+	}
+	else
 		return (0);
-	//return (1);
+	return (1);
 }
 
 void	deletepiece(int ps[4][2], char **board)
 {
-	ft_putstr("delete piece\n");
 	board[ps[0][0]][ps[0][1]] = '.';
 	board[ps[1][0]][ps[1][1]] = '.';
 	board[ps[2][0]][ps[2][1]] = '.';
@@ -64,7 +72,6 @@ void	placepiece(int ps[4][2], char **board, t_tetri *tetri)
 {
 	char AZ;
 
-	ft_putstr("place piece\n");
 	AZ = tetri->letter;
 	board[ps[0][0]][ps[0][1]] = AZ;
 	board[ps[1][0]][ps[1][1]] = AZ;
@@ -74,7 +81,6 @@ void	placepiece(int ps[4][2], char **board, t_tetri *tetri)
 
 int		canplace(int c[4][2], char **board, int y, int x, int ps[4][2])
 {
-	ft_putstr("can you placE?\n");	
 	if (y + c[0][0] < 0 || y + c[0][0] >= dimensions || x + c[0][1] < 0 || x + c[0][1] >= dimensions)
 		return (0);
 	if (board[y + c[0][0]][x + c[0][1]] != '.')
@@ -97,7 +103,6 @@ int		canplace(int c[4][2], char **board, int y, int x, int ps[4][2])
 
 void	finishboard(int c[4][2], int y, int x, int ps[4][2])
 {
-	ft_putstr("finish up the board\n");
 	ps[0][0] = y; 
 	ps[0][1] = x;
 	ps[1][0] = y + c[1][0]; 
@@ -113,7 +118,6 @@ void	zeroboard(int c[4][2])
 	int minusy;
 	int minusx;
 
-	ft_putstr("zero the board out\n");
 	minusy = c[0][0];
 	minusx = c[0][1];
 	c[0][0] = c[0][0] - minusy;
@@ -132,7 +136,6 @@ void	tetricoordinates(int c[4][2], t_tetri *tetri)
 	int mx;
 	int i;
 	
-	ft_putstr("tetri tetri coordinates!\n");
 	i = 0;
 	my = tetri->miny;
 	mx = tetri->minx;
@@ -148,6 +151,7 @@ void	tetricoordinates(int c[4][2], t_tetri *tetri)
 			}
 			mx++;	
 		}
+		mx = tetri->minx;
 		my++;
 	}
 	zeroboard(c);
@@ -155,7 +159,6 @@ void	tetricoordinates(int c[4][2], t_tetri *tetri)
 
 int		smallest_square(int i)
 {	
-	ft_putstr("ok ill find da smallest square\n");
 	if (i == 1)
 		return (2);
 	else if (i == 2)
@@ -184,7 +187,6 @@ void	createboard(t_tetri *tetri)
 	int i;
 	int n;
 
-	ft_putstr("i create de board\n");
 	n = 0;
 	i = 0;
 	board = (char **)malloc(sizeof(char *) * (120 + 1));
@@ -212,12 +214,11 @@ void	printboard(char **board, int dimensions)
 	int i;
 	int n;
 
-	ft_putstr("i print de board\n");
 	n = 0;
 	i = 0;
-	while (n < dimensions)
+	while (n < dimensions + tally)
 	{
-		while (i < dimensions)
+		while (i < dimensions + tally)
 			ft_putchar(board[n][i++]);	
 		i = 0;
 		write(1, "\n", 1);
