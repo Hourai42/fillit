@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/20 21:36:00 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 15:36:51 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ t_tetri	*parsefile(char *file)
 	int		br;
 	t_tetri	*list;
 	t_tetri 	*p;
+	int		flag;
 
+	flag = 0;
 	fd = open(file, O_RDONLY);
 	if (open_error(fd) == 0)
 		return (NULL);
@@ -73,6 +75,8 @@ t_tetri	*parsefile(char *file)
 	p = list;
 	while ((br = read(fd, str, 21)) >= 20)
 	{
+		if (br == 20)
+			flag = 1;
 		if (list->tetrimino == NULL)
 		{
 			if (!(list->tetrimino = ft_convertdata(str, br, list)))
@@ -84,7 +88,7 @@ t_tetri	*parsefile(char *file)
 	}
 	if (close_error(close(fd)) == 0)
 		return (NULL); 
-	if (br != 0 || globalcheck == 0)
+	if (br != 0 || globalcheck == 0 || flag == 0)
 		return (NULL);
 	return (list);
 }
