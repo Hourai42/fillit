@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 21:57:03 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 22:01:49 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ char	**ft_convertdata(char *str, int g_br, t_tetri *fuck)
 	return (store);
 }
 
-void	setparse(t_tetri **p, t_tetri *list)
+void	setparse(t_tetri **p, t_tetri *list, t_savespace *s)
 {
 	list->tetrimino = NULL;
 	list->next = NULL;
 	*p = list;
+	s->f = 0;
 }
 
 t_tetri	*parsefile(char *file)
@@ -72,7 +73,7 @@ t_tetri	*parsefile(char *file)
 	if (open_error(s->fd) == 0)
 		return (NULL);
 	list = malloc(sizeof(t_tetri));
-	setparse(&p, list);
+	setparse(&p, list, s);
 	while ((s->br = read(s->fd, s->str, 21)) >= 20)
 	{
 		if (s->br == 20)
