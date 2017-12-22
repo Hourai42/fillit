@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 18:00:03 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 15:24:43 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 18:26:58 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ void	createboard(t_tetri *tetri)
 		i = 0;
 		n++;
 	}
-	dimensions = smallest_square(globalcheck);
+	dimensions = smallest_square(g_gc);
    	if ((solvefillit(tetri, board, dimensions) == 1))
 		printboard(board, dimensions);
 }

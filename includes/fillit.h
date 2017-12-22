@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:04:25 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 15:04:34 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 18:43:51 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ typedef struct	s_tetri
 int		ft_listcreate(t_tetri **p, char *str, int br);
 char	**ft_convertdata(char *str, int br, t_tetri *fuck);
 t_tetri *parsefile(char *file);
-void	print_pieces(t_tetri *pieces);
 void	ft_free(t_tetri *tetri);
-
+void	setparse(t_tetri *p, t_tetri *list);
+extern int g_br;
+extern int g_f;
+extern t_tetri *g_p;
 /*Check input */
 int	open_error(int fd);
 int	close_error(int fd);
@@ -49,13 +51,12 @@ void	ft_min(t_tetri *fuck, int y, int x, int pound);
 void	ft_max(t_tetri *fuck, int y, int x, int pound);
 int	check_valid(t_tetri *fuck, char **store);
 int	ft_setletter(t_tetri *fuck);
-extern int globalcheck;
+extern int g_gc;
 
 /*Solve */
 int	smallest_square(int i);
 void	createboard(t_tetri *tetri);
 void printboard(char **board, int dimensions);
-extern int dimensions;
 extern int tally;
 int	solvefillit(t_tetri *tetri, char **board, int dimensions);
 void	deletepiece(int ps[4][2], char **board);

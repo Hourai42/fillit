@@ -6,12 +6,12 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 19:49:04 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/20 21:35:43 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 18:27:14 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-int globalcheck = 0;
+int g_gc = 0;
 
 int	open_error(int fd)
 {
@@ -135,10 +135,10 @@ void	ft_max(t_tetri *fuck, int y, int x, int pound)
 
 int		ft_setletter(t_tetri *fuck)
 {
-	if (globalcheck == 26)
+	if (g_gc == 26)
 		return (0);
-	fuck->letter = 'A' + globalcheck;
-	globalcheck++;
+	fuck->letter = 'A' + g_gc;
+	g_gc++;
 	return (1);
 }
 
