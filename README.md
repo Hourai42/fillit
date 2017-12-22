@@ -8,5 +8,7 @@ Both of us have working projects and solutions, but I figure it'll be too much e
 I will also be uploading the project my partner and I are turning in as "fillitTeam". 
 
 Runtimes for: 8 horizontal lines
+
 My code: 44.982 seconds
+
 Partner's code: 2:49:44.
