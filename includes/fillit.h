@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:04:25 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 21:49:47 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 22:05:30 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		ft_listcreate(t_tetri **p, char *str, int br);
 char	**ft_convertdata(char *str, int br, t_tetri *fuck);
 t_tetri *parsefile(char *file);
 void	ft_free(t_tetri *tetri);
-void	setparse(t_tetri **p, t_tetri *list);
 typedef struct s_savespace
 {
 	int br;
@@ -45,7 +44,7 @@ typedef struct s_savespace
 	int fd;
 	char str[21];
 }	t_savespace;
-
+void    setparse(t_tetri **p, t_tetri *list, t_savespace *s);
 /*Check input */
 int	open_error(int fd);
 int	close_err(int fd);
