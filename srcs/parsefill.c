@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 18:43:48 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 18:54:30 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int g_f = 0;
 int g_br = 0;
-t_tetri *g_p = NULL;
+int g_fd = 0;
 
 int		ft_listcreate(t_tetri **p, char *str, int g_br)
 {
@@ -58,25 +58,26 @@ char	**ft_convertdata(char *str, int g_br, t_tetri *fuck)
 	return (store);
 }
 
-void	setparse(t_tetri *p, t_tetri *list)
+void	setparse(t_tetri **p, t_tetri *list)
 {
 	list->tetrimino = NULL;
 	list->next = NULL;
-	p = list;
+	*p = list;
 }
 
 t_tetri	*parsefile(char *file)
 {
-	int		fd;
 	char	str[21];
 	t_tetri	*list;
+	t_tetri *p;
 
-	fd = open(file, O_RDONLY);
-	if (open_error(fd) == 0)
+	g_fd = open(file, O_RDONLY);
+	if (open_error(g_fd) == 0)
 		return (NULL);
 	list = malloc(sizeof(t_tetri));
-	setparse(g_p, list);
-	while ((g_br = read(fd, str, 21)) >= 20)
+	p = NULL;
+	setparse(&p, list);
+	while ((g_br = read(g_fd, str, 21)) >= 20)
 	{
 		if (g_br == 20)
 			g_f = 1;
@@ -85,10 +86,10 @@ t_tetri	*parsefile(char *file)
 			if (!(list->tetrimino = ft_convertdata(str, g_br, list)))
 				return (NULL);
 		}
-		else if (ft_listcreate(&g_p, str, g_br) == 0)
+		else if (ft_listcreate(&p, str, g_br) == 0)
 			return (NULL);
 	}
-	if ((close_error(close(fd)) == 0) || g_br != 0 || g_gc == 0 || g_f == 0)
+	if ((close_error(close(g_fd)) == 0) || g_br != 0 || g_gc == 0 || g_f == 0)
 		return (NULL);
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:04:25 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 18:43:51 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 18:53:39 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int		ft_listcreate(t_tetri **p, char *str, int br);
 char	**ft_convertdata(char *str, int br, t_tetri *fuck);
 t_tetri *parsefile(char *file);
 void	ft_free(t_tetri *tetri);
-void	setparse(t_tetri *p, t_tetri *list);
+void	setparse(t_tetri **p, t_tetri *list);
 extern int g_br;
 extern int g_f;
-extern t_tetri *g_p;
+extern int g_fd;
 /*Check input */
 int	open_error(int fd);
 int	close_error(int fd);
