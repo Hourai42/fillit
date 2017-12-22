@@ -198,17 +198,17 @@ void	createboard(t_tetri *tetri)
 	//ft_putstr("Makes the board\n");
 	n = 0;
 	i = 0;
-	board = (char **)malloc(sizeof(char *) * (120 + 1));
-	board[120] = 0;
-	while (i < 120)
+	board = (char **)malloc(sizeof(char *) * (15 + 1));
+	board[15] = 0;
+	while (i < 15)
 	{
-		board[i] = (char *)malloc(sizeof(char) * (120 + 1));	
-		board[i++][120] = '\0';
+		board[i] = (char *)malloc(sizeof(char) * (15 + 1));	
+		board[i++][15] = '\0';
 	}
 	i = 0;
-	while (n < 120)
+	while (n < 15)
 	{
-		while (i < 120)
+		while (i < 15)
 			board[n][i++] = '.';	
 		i = 0;
 		n++;
