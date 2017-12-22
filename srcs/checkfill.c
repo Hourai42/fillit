@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 19:49:04 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 18:27:14 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 21:50:09 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	open_error(int fd)
 	return (1);
 }
 
-int	close_error(int fd)
+int	close_err(int fd)
 {
 	if (close(fd) == -1)
 	{

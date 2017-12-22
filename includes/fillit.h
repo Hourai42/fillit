@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:04:25 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 18:53:39 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 21:49:47 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ char	**ft_convertdata(char *str, int br, t_tetri *fuck);
 t_tetri *parsefile(char *file);
 void	ft_free(t_tetri *tetri);
 void	setparse(t_tetri **p, t_tetri *list);
-extern int g_br;
-extern int g_f;
-extern int g_fd;
+typedef struct s_savespace
+{
+	int br;
+	int f;
+	int fd;
+	char str[21];
+}	t_savespace;
+
 /*Check input */
 int	open_error(int fd);
-int	close_error(int fd);
+int	close_err(int fd);
 int	ft_check_buffer(char *str,int br);
 int	ft_check_characters(char *str);
 int	ft_check_connections(char **str, int y, int x);

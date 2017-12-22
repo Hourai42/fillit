@@ -6,15 +6,11 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 20:08:36 by ttran             #+#    #+#             */
-/*   Updated: 2017/12/21 18:54:30 by ttran            ###   ########.fr       */
+/*   Updated: 2017/12/21 21:57:03 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int g_f = 0;
-int g_br = 0;
-int g_fd = 0;
 
 int		ft_listcreate(t_tetri **p, char *str, int g_br)
 {
@@ -67,29 +63,29 @@ void	setparse(t_tetri **p, t_tetri *list)
 
 t_tetri	*parsefile(char *file)
 {
-	char	str[21];
-	t_tetri	*list;
-	t_tetri *p;
+	t_savespace *s;
+	t_tetri		*list;
+	t_tetri		*p;
 
-	g_fd = open(file, O_RDONLY);
-	if (open_error(g_fd) == 0)
+	s = malloc(sizeof(t_savespace));
+	s->fd = open(file, O_RDONLY);
+	if (open_error(s->fd) == 0)
 		return (NULL);
 	list = malloc(sizeof(t_tetri));
-	p = NULL;
 	setparse(&p, list);
-	while ((g_br = read(g_fd, str, 21)) >= 20)
+	while ((s->br = read(s->fd, s->str, 21)) >= 20)
 	{
-		if (g_br == 20)
-			g_f = 1;
+		if (s->br == 20)
+			s->f = 1;
 		if (list->tetrimino == NULL)
 		{
-			if (!(list->tetrimino = ft_convertdata(str, g_br, list)))
+			if (!(list->tetrimino = ft_convertdata(s->str, s->br, list)))
 				return (NULL);
 		}
-		else if (ft_listcreate(&p, str, g_br) == 0)
+		else if (ft_listcreate(&p, s->str, s->br) == 0)
 			return (NULL);
 	}
-	if ((close_error(close(g_fd)) == 0) || g_br != 0 || g_gc == 0 || g_f == 0)
+	if ((close_err(close(s->fd)) == 0) || s->br != 0 || g_gc == 0 || s->f == 0)
 		return (NULL);
 	return (list);
 }
